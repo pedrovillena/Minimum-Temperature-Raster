@@ -1,0 +1,16 @@
+# Core geospatial + app
+geopandas
+rasterio
+rioxarray
+rasterstats
+shapely
+pyproj
+numpy
+pandas
+matplotlib
+streamlit
+folium
+branca
+# Optional: for Google Drive downloads in get_data.py
+gdown
+requests
