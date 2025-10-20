@@ -70,21 +70,53 @@ st.subheader("Ranking: Coldest and Warmest")
 label_col = "DISTRITO_N" if level=="district" else ("PROVINCIA_N" if level=="province" else "DEPARTAMENTO")
 coldest = out.sort_values("mean").head(15)
 warmest = out.sort_values("mean", ascending=False).head(15)
+col_labels = {
+    label_col: "Location",
+    "mean": "Mean Tmin (°C)",
+    "percentile_10": "10th Percentile (°C)",
+    "percentile_90": "90th Percentile (°C)",
+    "below_threshold_pct": "% Below Threshold",
+    "risk_score": "Risk Score"
+}
+def format_table(df, cols):
+    df_display = df[cols].copy()
+    for c in df_display.select_dtypes(include="number").columns:
+        df_display[c] = df_display[c].round(2)
+    return df_display.rename(columns=col_labels)
 c1, c2 = st.columns(2, gap="large")
 with c1:
     st.write("**Top 15 Coldest (lowest mean Tmin)**")
-    st.dataframe(coldest[[label_col, "mean","percentile_10","below_threshold_pct","risk_score"]])
+    st.dataframe(format_table(coldest, [label_col, "mean", "percentile_10", "below_threshold_pct", "risk_score"]))
+                 
 with c2:
     st.write("**Top 15 Warmest (highest mean Tmin)**")
-    st.dataframe(warmest[[label_col, "mean","percentile_90","risk_score"]])
+    st.dataframe(format_table(warmest, [label_col, "mean", "percentile_90", "risk_score"]))
 
 st.subheader("Static map: mean Tmin")
-gdf_plot = gdf_lvl.copy()
-gdf_plot = gdf_plot.join(out["mean"], how="left")
-fig2 = plt.figure()
-ax = gdf_plot.plot(column="mean", legend=True)
-plt.title(f"Mean Tmin by {level}")
-plt.axis("off")
+gdf_plot = gdf_lvl.merge(out[[label_col, "mean"]], on=label_col, how="left")
+fig2, ax = plt.subplots(figsize=(10, 10))
+gdf_plot.plot(
+    column="mean",
+    cmap="YlOrRd",          
+    linewidth=0.3,          
+    edgecolor="gray",       
+    legend=True,
+    ax=ax,
+    missing_kwds={
+        "color": "lightgrey",
+        "label": "Sin datos"
+    }
+)
+
+ax.set_title(f"Choropleth Map by {level}", fontsize=12)
+ax.set_axis_off()
+
+#gdf_plot = gdf_lvl.copy()
+#gdf_plot = gdf_plot.join(out["mean"], how="left")
+#fig2 = plt.figure()
+#ax = gdf_plot.plot(column="mean", legend=True)
+#plt.title(f"Mean Tmin by {level}")
+#plt.axis("off")
 st.pyplot(fig2)
 
 st.header("Downloads")
