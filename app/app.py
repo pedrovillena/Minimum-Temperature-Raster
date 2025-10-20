@@ -249,7 +249,7 @@ st.markdown("""
 Reducir el impacto sanitario y educativo de eventos de friaje (caída súbita de temperatura) en poblaciones amazónicas.
 
 **🗺️ Población/territorio objetivo:**  
-- Departamentos: **Loreto, Ucayali, Madre de Dios** (mencionados en términos de referencia)
+- Departamentos: **Loreto, Ucayali, Madre de Dios** 
 - **Identificación específica requiere:** Análisis de datos históricos de SENAMHI sobre eventos de friaje + cruce con data del raster para identificar distritos donde Tmin cae <12°C durante estos eventos
 
 **Actualmente no tenemos:** Datos específicos de temperatura amazónica en este análisis (el raster muestra principalmente zona andina).
@@ -272,40 +272,6 @@ Requiere:
 - ✅ Reducir hospitalizaciones por IRA durante friajes
 - ✅ % de instituciones educativas y de salud con kits pre-posicionados
 - ✅ Línea base: Obtener data de SENAMHI de frecuencia e intensidad de friajes + data MINSA/MINEDU de impacto
-""")
-
-st.markdown("---")
-
-st.warning("""
-**⚠️ IMPORTANTE - Pasos siguientes para implementación:**
-
-Estas propuestas se basan en el análisis geoespacial de **746 distritos** procesados. Para su implementación se requiere:
-
-1. **Estudios complementarios:**
-   - Censo de población y viviendas en los 15 distritos críticos (coordinación con INEI)
-   - Censo agropecuario en los 8 distritos con alta frecuencia de heladas (CENAGRO/SENASA)
-   - Análisis temporal de eventos de friaje amazónico (SENAMHI últimos 10 años)
-
-2. **Validación de costos:**
-   - Cotizaciones con proveedores locales y empresas constructoras
-   - Consulta con FONCODES, AGRO RURAL, gobiernos regionales sobre experiencias similares
-   - Estudios de pre-inversión (Invierte.pe)
-
-3. **Líneas base para KPIs:**
-   - Data MINSA/ESSALUD: casos IRA, neumonías, mortalidad por frío (últimos 3 años)
-   - Data SENASA: mortalidad de ganado por distrito
-   - Data MINEDU: ausentismo escolar durante meses fríos
-   - Data económica: pérdidas por heladas (encuestas a productores)
-
-4. **Articulación institucional:**
-   - Gobiernos regionales de Puno, Tacna, Moquegua, Arequipa, Cusco
-   - MIDIS, MVCS, MINAGRI, MINSA, MINEDU
-   - Municipalidades distritales identificadas
-""")
-
-st.info("""
-**💡 Nota metodológica:**  
-Este análisis utilizó un raster de temperatura mínima procesado para 746 distritos del Perú. Los datos presentados son resultados directos del análisis geoespacial. Todos los valores de temperatura, percentiles y porcentajes son mediciones reales del procesamiento realizado.
 """)
 
 st.caption("Built with GeoPandas, rasterstats, rioxarray, and Streamlit.")
